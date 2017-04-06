@@ -2,7 +2,7 @@
 
 
 
-enum Answer : Equatable {
+enum Answer: Equatable {
     case fizz
     case buzz
     case fizzBuzz
@@ -22,25 +22,26 @@ enum Answer : Equatable {
 }
 
 func transform(n: Int) -> Answer {
-    for i in 1...n {
-        if i % 3 == 0 && i % 5 != 0 {
-            print("fizz")
-        } else if i % 5 == 0 && i % 3 != 0 {
-            print("buzz")
-        } else if i % 15 == 0 {
-            print("FizzBuzz")
-        } else {
-            
-            
-            print(i)
-        }
+    if n % 3 == 0 && n % 5 != 0 {
+        return .fizz
+    } else if n % 5 == 0 && n % 3 != 0 {
+        return .buzz
+    } else if n % 15 == 0 {
+        return .fizzBuzz
+    } else {
+        return Answer.number(n)
         
     }
-    return Answer.number(n)
+    
+    
+    
 }
+transform(n: 5)
 
 
-transform(n: 100)
+
+
+
 
 
 
@@ -55,49 +56,43 @@ transform(n: 100)
 
 
  
- enum Answer : Equatable {
- case fizz
- case buzz
- case fizzBuzz
- case number(Int)
- 
- 
- static func == (lhs: Answer, rhs: Answer) -> Bool {
- switch (lhs, rhs) {
- case (.fizz, .fizz), (.buzz, .buzz), (.fizzBuzz, .fizzBuzz):
- return true
- case (.number(let leftNum), .number(let rightNum)):
- return leftNum == rightNum
- case (.fizz, _), (.buzz, _), (.fizzBuzz, _), (.number, _):
- return false
- }
- }
- }
- 
- 
- 
- 
- func transform(n: Int) -> Answer {
- for i in 1...n {
- switch (i) {
- case _ where i % 3 == 0 && i % 5 != 0:
- print("fizz")
- case _ where i % 5 == 0 && i % 3 != 0:
- print("buzz")
- case _ where i % 15 == 0:
- print("FizzBuzz")
- default:
- print(i)
- 
- }
- 
- }
- return Answer.number(n)
- }
- 
- 
- transform(n: 100)
- 
+enum Answer : Equatable {
+    case fizz
+    case buzz
+    case fizzBuzz
+    case number(Int)
+    
+    
+    
+    static func == (lhs: Answer, rhs: Answer) -> Bool {
+        switch (lhs, rhs) {
+        case (.fizz, .fizz), (.buzz, .buzz), (.fizzBuzz, .fizzBuzz):
+            return true
+        case (.number(let leftNum), .number(let rightNum)):
+            return leftNum == rightNum
+        case (.fizz, _), (.buzz, _), (.fizzBuzz, _), (.number, _):
+            return false
+        }
+    }
+}
+
+
+func transform(n: Int) -> Answer {
+    switch n {
+    case _ where n % 3 == 0 && n % 5 != 0:
+        return .fizz
+    case _ where n % 5 == 0 && n % 3 != 0:
+        return .buzz
+    case _ where n % 15 == 0:
+        return .fizzBuzz
+    default:
+        break
+    }
+    return Answer.number(n)
+    
+}
+
+transform(n: 45)
 
 
 
